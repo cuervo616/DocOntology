@@ -1,0 +1,2286 @@
+@prefix : <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/> rdf:type owl:Ontology ;
+                                                                          rdfs:comment "Descripción: Este modelo ontológico busca ser un mapa detallado que guía la comprensión de las interconexiones dentro de la industria turística ecuatoriana" ;
+                                                                          owl:versionInfo 1.0 .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/compran
+:compran rdf:type owl:ObjectProperty ;
+         owl:inverseOf :esvendidoA .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destino
+:destino rdf:type owl:ObjectProperty ;
+         rdfs:domain :PaqueteTuristico ;
+         rdfs:range :DestinoTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/esvendidoA
+:esvendidoA rdf:type owl:ObjectProperty ;
+            rdfs:domain :PaqueteTuristico ;
+            rdfs:range :Turista .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/genero
+:genero rdf:type owl:ObjectProperty ;
+        rdfs:domain :Turista ;
+        rdfs:range :Genero .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ofrece
+:ofrece rdf:type owl:ObjectProperty ;
+        owl:inverseOf :ofrecidoPor .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ofreceActividad
+:ofreceActividad rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :ofrece ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Alojamiento
+                                             :PaqueteTuristico
+                                             :Ubicacion
+                                           )
+                             ] .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ofreceHospedaje
+:ofreceHospedaje rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :ofrece ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :PaqueteTuristico
+                                             :Ubicacion
+                                           )
+                             ] .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ofreceTransporte
+:ofreceTransporte rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :ofrece ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :PaqueteTuristico
+                                              :Ubicacion
+                                            )
+                              ] .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ofrecidoPor
+:ofrecidoPor rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tiene
+:tiene rdf:type owl:ObjectProperty ;
+       owl:inverseOf :ubicadoEn .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tieneDescuento
+:tieneDescuento rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( :PaqueteTuristico
+                                            :Turista
+                                          )
+                            ] ;
+                rdfs:range :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ubicadoEn
+:ubicadoEn rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Alojamiento
+                                       :DestinoTuristico
+                                       :Ubicacion
+                                     )
+                       ] ;
+           rdfs:range :Ubicacion .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ubicadoEnCiudad
+:ubicadoEnCiudad rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :ubicadoEn ;
+                 rdfs:range :Ciudad .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ubicadoEnMontaña
+:ubicadoEnMontaña rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :ubicadoEn ;
+                  rdfs:range :Montana .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ubicadoEnPlaya
+:ubicadoEnPlaya rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :ubicadoEn ;
+                rdfs:range :Playa .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/vende
+:vende rdf:type owl:ObjectProperty ;
+       owl:inverseOf :vendidoPor ;
+       rdfs:domain :AgenciaTurismo ;
+       rdfs:range :PaqueteTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/vendidoPor
+:vendidoPor rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/viajaCon
+:viajaCon rdf:type owl:ObjectProperty ;
+          owl:inverseOf :viajaCon ;
+          rdf:type owl:SymmetricProperty ;
+          rdfs:domain :Turista ;
+          rdfs:range :Turista .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/capacidad
+:capacidad rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Transporte ;
+           rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/edad
+:edad rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/precio
+:precio rdf:type owl:DatatypeProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :Alojamiento
+                                    :PaqueteTuristico
+                                  )
+                    ] ;
+        rdfs:range xsd:decimal .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tieneAereopuerto
+:tieneAereopuerto rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf :tieneEstacion ;
+                  rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tieneEstacion
+:tieneEstacion rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Ubicacion .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tieneEstacionTren
+:tieneEstacionTren rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :tieneEstacion ;
+                   rdfs:domain :Ciudad ;
+                   rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tieneNombre
+:tieneNombre rdf:type owl:DatatypeProperty ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tienePuerto
+:tienePuerto rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :tieneEstacion ;
+             rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tieneTerminal
+:tieneTerminal rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :tieneEstacion ;
+               rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/vendidoEnMes
+:vendidoEnMes rdf:type owl:DatatypeProperty ;
+              rdfs:domain :PaqueteTuristico .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Actividad
+:Actividad rdf:type owl:Class ;
+           rdfs:comment "Clase que describe los tipos de actividades que se pueden realizar."@es ,
+                        "Class that describes the types of activities that can be performed."@en .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ActividadCultural
+:ActividadCultural rdf:type owl:Class ;
+                   rdfs:subClassOf :Actividad .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ActividadDeEntretenimiento
+:ActividadDeEntretenimiento rdf:type owl:Class ;
+                            rdfs:subClassOf :Actividad .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ActividadDeportiva
+:ActividadDeportiva rdf:type owl:Class ;
+                    rdfs:subClassOf :Actividad .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/AgenciaTurismo
+:AgenciaTurismo rdf:type owl:Class ;
+                rdfs:comment "Tourism company class"@en ,
+                             "Clase de la empresa de turismo" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Alojamiento
+:Alojamiento rdf:type owl:Class ;
+             rdfs:comment "Clase con los tipos de alojamiento disponible"@es ,
+                          "Class with the types of accommodation available"@en .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/AutoBus
+:AutoBus rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty :capacidad ;
+                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                    owl:onDatatype xsd:integer ;
+                                                    owl:withRestrictions ( [ xsd:minInclusive 16
+                                                                           ]
+                                                                           [ xsd:maxInclusive 70
+                                                                           ]
+                                                                         )
+                                                  ]
+                             ] ;
+         rdfs:subClassOf :Transporte ;
+         owl:disjointWith :Avion ,
+                          :Lancha ,
+                          :Tren .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Avion
+:Avion rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :capacidad ;
+                             owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                  owl:onDatatype xsd:integer ;
+                                                  owl:withRestrictions ( [ xsd:minExclusive 70
+                                                                         ]
+                                                                         [ xsd:maxInclusive 150
+                                                                         ]
+                                                                       )
+                                                ]
+                           ] ;
+       rdfs:subClassOf :Transporte ;
+       owl:disjointWith :Lancha ,
+                        :Tren .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Ciudad
+:Ciudad rdf:type owl:Class ;
+        rdfs:subClassOf :Ubicacion .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DescNinos
+:DescNinos rdf:type owl:Class ;
+           rdfs:subClassOf :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DescPorTemporada
+:DescPorTemporada rdf:type owl:Class ;
+                  rdfs:subClassOf :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DescTerceraEdad
+:DescTerceraEdad rdf:type owl:Class ;
+                 rdfs:subClassOf :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Descuento
+:Descuento rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DestinoCultural
+:DestinoCultural rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                       owl:onProperty :ofrece ;
+                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :ActividadCultural
+                                     ] ;
+                 rdfs:subClassOf :DestinoTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DestinoDeEntretenimiento
+:DestinoDeEntretenimiento rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                owl:onProperty :ofrece ;
+                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :ActividadDeEntretenimiento
+                                              ] ;
+                          rdfs:subClassOf :DestinoTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DestinoDeportivo
+:DestinoDeportivo rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :ofrece ;
+                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :ActividadDeportiva
+                                      ] ;
+                  rdfs:subClassOf :DestinoTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/DestinoTuristico
+:DestinoTuristico rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Femenino
+:Femenino rdf:type owl:Class ;
+          rdfs:subClassOf :Genero .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Genero
+:Genero rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Glamping
+:Glamping rdf:type owl:Class ;
+          rdfs:subClassOf :Alojamiento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Hotel
+:Hotel rdf:type owl:Class ;
+       rdfs:subClassOf :Alojamiento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/HotelDeLujo
+:HotelDeLujo rdf:type owl:Class ;
+             rdfs:subClassOf :Hotel .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/HotelEconomico
+:HotelEconomico rdf:type owl:Class ;
+                rdfs:subClassOf :Hotel .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Lancha
+:Lancha rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Restriction ;
+                              owl:onProperty :capacidad ;
+                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                   owl:onDatatype xsd:integer ;
+                                                   owl:withRestrictions ( [ xsd:maxInclusive 15
+                                                                          ]
+                                                                        )
+                                                 ]
+                            ] ;
+        rdfs:subClassOf :Transporte ;
+        owl:disjointWith :Tren .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Masculino
+:Masculino rdf:type owl:Class ;
+           rdfs:subClassOf :Genero .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Montana
+:Montana rdf:type owl:Class ;
+         rdfs:subClassOf :Ubicacion .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/PaqueteCultural
+:PaqueteCultural rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                       owl:onProperty :destino ;
+                                       owl:someValuesFrom :DestinoCultural
+                                     ] ;
+                 rdfs:subClassOf :PaqueteTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/PaqueteDeEntretenimiento
+:PaqueteDeEntretenimiento rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                owl:onProperty :destino ;
+                                                owl:someValuesFrom :DestinoDeEntretenimiento
+                                              ] ;
+                          rdfs:subClassOf :PaqueteTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/PaqueteDeportivo
+:PaqueteDeportivo rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :destino ;
+                                        owl:someValuesFrom :DestinoDeportivo
+                                      ] ;
+                  rdfs:subClassOf :PaqueteTuristico .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/PaqueteTuristico
+:PaqueteTuristico rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Playa
+:Playa rdf:type owl:Class ;
+       rdfs:subClassOf :Ubicacion .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Resort
+:Resort rdf:type owl:Class ;
+        rdfs:subClassOf :Alojamiento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Transporte
+:Transporte rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Tren
+:Tren rdf:type owl:Class ;
+      owl:equivalentClass [ rdf:type owl:Restriction ;
+                            owl:onProperty :capacidad ;
+                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                 owl:onDatatype xsd:integer ;
+                                                 owl:withRestrictions ( [ xsd:minExclusive 150
+                                                                        ]
+                                                                        [ xsd:maxInclusive 470
+                                                                        ]
+                                                                      )
+                                               ]
+                          ] ;
+      rdfs:subClassOf :Transporte .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Turista
+:Turista rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/TuristaAdulto
+:TuristaAdulto rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty :edad ;
+                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                          owl:onDatatype xsd:integer ;
+                                                          owl:withRestrictions ( [ xsd:maxExclusive 65
+                                                                                 ]
+                                                                               )
+                                                        ]
+                                   ] ;
+               rdfs:subClassOf :TuristaMayorDeEdad .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/TuristaAdultoMayor
+:TuristaAdultoMayor rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :edad ;
+                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                               owl:onDatatype xsd:integer ;
+                                                               owl:withRestrictions ( [ xsd:minInclusive 65
+                                                                                      ]
+                                                                                    )
+                                                             ]
+                                        ] ;
+                    rdfs:subClassOf :TuristaMayorDeEdad .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/TuristaMayorDeEdad
+:TuristaMayorDeEdad rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :edad ;
+                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                               owl:onDatatype xsd:integer ;
+                                                               owl:withRestrictions ( [ xsd:minInclusive 18
+                                                                                      ]
+                                                                                    )
+                                                             ]
+                                        ] ;
+                    rdfs:subClassOf :Turista .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/TuristaMenorDeEdad
+:TuristaMenorDeEdad rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :edad ;
+                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                               owl:onDatatype xsd:integer ;
+                                                               owl:withRestrictions ( [ xsd:maxInclusive 17
+                                                                                      ]
+                                                                                    )
+                                                             ]
+                                        ] ;
+                    rdfs:subClassOf :Turista ,
+                                    :TuristaAdulto .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/Ubicacion
+:Ubicacion rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadCultural1
+:actividadCultural1 rdf:type owl:NamedIndividual ,
+                             :Actividad ,
+                             :ActividadCultural ;
+                    :ofrecidoPor :destinoTuristico1 ,
+                                 :destinoTuristico2 ,
+                                 :hotel3 ,
+                                 :paqueteTuristico1 ,
+                                 :paqueteTuristico6 ;
+                    :tieneNombre "Visitar museos y galerías de arte" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadCultural2
+:actividadCultural2 rdf:type owl:NamedIndividual ,
+                             :Actividad ,
+                             :ActividadCultural ;
+                    :ofrecidoPor :destinoTuristico1 ,
+                                 :destinoTuristico2 ,
+                                 :destinoTuristico3 ,
+                                 :paqueteTuristico1 ,
+                                 :paqueteTuristico6 ;
+                    :tieneNombre "Recorrer sitios históricos" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadCultural3
+:actividadCultural3 rdf:type owl:NamedIndividual ,
+                             :Actividad ,
+                             :ActividadCultural ;
+                    :ofrecidoPor :destinoTuristico1 ,
+                                 :destinoTuristico2 ,
+                                 :glamping1 ,
+                                 :glamping2 ,
+                                 :glamping3 ,
+                                 :hotel1 ,
+                                 :hotel3 ,
+                                 :hotel5 ,
+                                 :paqueteTuristico1 ,
+                                 :paqueteTuristico6 ,
+                                 :resort1 ,
+                                 :resort2 ,
+                                 :resort3 ;
+                    :tieneNombre "Probar la comida local" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadDeEntretenimiento1
+:actividadDeEntretenimiento1 rdf:type owl:NamedIndividual ,
+                                      :Actividad ,
+                                      :ActividadDeEntretenimiento ;
+                             :ofrecidoPor :destinoTuristico10 ,
+                                          :destinoTuristico6 ,
+                                          :glamping1 ,
+                                          :paqueteTuristico2 ,
+                                          :paqueteTuristico4 ;
+                             :tieneNombre "Paquetes temáticos y atracciones" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadDeEntretenimiento2
+:actividadDeEntretenimiento2 rdf:type owl:NamedIndividual ,
+                                      :Actividad ,
+                                      :ActividadDeEntretenimiento ;
+                             :ofrecidoPor :destinoTuristico4 ,
+                                          :destinoTuristico5 ,
+                                          :hotel1 ,
+                                          :hotel2 ,
+                                          :paqueteTuristico2 ,
+                                          :paqueteTuristico6 ,
+                                          :resort1 ,
+                                          :resort2 ,
+                                          :resort3 ;
+                             :tieneNombre "Discotecas y vida nocturna" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadDeEntretenimiento3
+:actividadDeEntretenimiento3 rdf:type owl:NamedIndividual ,
+                                      :Actividad ,
+                                      :ActividadDeEntretenimiento ;
+                             :ofrecidoPor :destinoTuristico10 ,
+                                          :destinoTuristico6 ,
+                                          :glamping3 ,
+                                          :hotel3 ,
+                                          :paqueteTuristico2 ,
+                                          :paqueteTuristico4 ,
+                                          :resort1 ,
+                                          :resort2 ,
+                                          :resort3 ;
+                             :tieneNombre "Espectáculos en vivo" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadDeportiva1
+:actividadDeportiva1 rdf:type owl:NamedIndividual ,
+                              :Actividad ,
+                              :ActividadDeportiva ;
+                     :ofrecidoPor :destinoTuristico11 ,
+                                  :destinoTuristico13 ,
+                                  :destinoTuristico9 ,
+                                  :glamping1 ,
+                                  :glamping2 ,
+                                  :glamping3 ,
+                                  :paqueteTuristico3 ,
+                                  :paqueteTuristico5 ;
+                     :tieneNombre "Senderismo y Trekking" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadDeportiva2
+:actividadDeportiva2 rdf:type owl:NamedIndividual ,
+                              :Actividad ,
+                              :ActividadDeportiva ;
+                     :ofrecidoPor :destinoTuristico10 ,
+                                  :destinoTuristico12 ,
+                                  :destinoTuristico14 ,
+                                  :destinoTuristico8 ,
+                                  :glamping1 ,
+                                  :glamping2 ,
+                                  :paqueteTuristico3 ,
+                                  :paqueteTuristico4 ,
+                                  :paqueteTuristico5 ,
+                                  :paqueteTuristico6 ,
+                                  :resort1 ,
+                                  :resort2 ,
+                                  :resort3 ;
+                     :tieneNombre "Deportes acuáticos" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/actividadDeportiva3
+:actividadDeportiva3 rdf:type owl:NamedIndividual ,
+                              :Actividad ,
+                              :ActividadDeportiva ;
+                     :ofrecidoPor :destinoTuristico11 ,
+                                  :destinoTuristico12 ,
+                                  :destinoTuristico14 ,
+                                  :destinoTuristico15 ,
+                                  :destinoTuristico7 ,
+                                  :destinoTuristico8 ,
+                                  :glamping1 ,
+                                  :glamping2 ,
+                                  :paqueteTuristico3 ,
+                                  :paqueteTuristico4 ,
+                                  :paqueteTuristico5 ,
+                                  :paqueteTuristico6 ,
+                                  :resort1 ,
+                                  :resort2 ,
+                                  :resort3 ;
+                     :tieneNombre "Deportes de equipos o individuales" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/agencia1
+:agencia1 rdf:type owl:NamedIndividual ,
+                   :AgenciaTurismo ;
+          :vende :paqueteTuristico1 ;
+          :tieneNombre "Sol Caribe" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/agencia2
+:agencia2 rdf:type owl:NamedIndividual ,
+                   :AgenciaTurismo ;
+          :vende :paqueteTuristico2 ;
+          :tieneNombre "Travel Time Ecuador" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/agencia3
+:agencia3 rdf:type owl:NamedIndividual ,
+                   :AgenciaTurismo ;
+          :vende :paqueteTuristico3 ;
+          :tieneNombre "Cite Tour" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/autobus1
+:autobus1 rdf:type owl:NamedIndividual ,
+                   :AutoBus ,
+                   :Transporte ;
+          :ofrecidoPor :ciudad1 ,
+                       :ciudad2 ,
+                       :ciudad3 ;
+          :capacidad 25 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/avion1
+:avion1 rdf:type owl:NamedIndividual ,
+                 :Avion ,
+                 :Transporte ;
+        :ofrecidoPor :ciudad1 ,
+                     :ciudad2 ;
+        :capacidad 130 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ciudad1
+:ciudad1 rdf:type owl:NamedIndividual ,
+                  :Ciudad ,
+                  :Ubicacion ;
+         :ofrece :autobus1 ,
+                 :avion1 ;
+         :ofreceTransporte :autobus1 ,
+                           :avion1 ;
+         :tiene :destinoTuristico1 ,
+                :destinoTuristico4 ,
+                :destinoTuristico7 ,
+                :hotel1 ,
+                :hotel2 ,
+                :paqueteTuristico1 ,
+                :paqueteTuristico2 ,
+                :paqueteTuristico3 ,
+                :paqueteTuristico6 ;
+         :tieneAereopuerto "true"^^xsd:boolean ;
+         :tieneEstacion "true"^^xsd:boolean ;
+         :tieneNombre "Cuenca" ;
+         :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ciudad2
+:ciudad2 rdf:type owl:NamedIndividual ,
+                  :Ciudad ,
+                  :Ubicacion ;
+         :ofrece :autobus1 ,
+                 :avion1 ;
+         :ofreceTransporte :autobus1 ,
+                           :avion1 ;
+         :tiene :destinoTuristico2 ,
+                :destinoTuristico5 ,
+                :destinoTuristico8 ,
+                :hotel3 ,
+                :hotel4 ,
+                :paqueteTuristico1 ,
+                :paqueteTuristico2 ,
+                :paqueteTuristico3 ;
+         :tieneAereopuerto "true"^^xsd:boolean ;
+         :tieneEstacion "true"^^xsd:boolean ;
+         :tieneNombre "Quito" ;
+         :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/ciudad3
+:ciudad3 rdf:type owl:NamedIndividual ,
+                  :Ciudad ,
+                  :Ubicacion ;
+         :ofrece :autobus1 ,
+                 :tren1 ;
+         :ofreceTransporte :autobus1 ,
+                           :tren1 ;
+         :tiene :destinoTuristico1 ,
+                :destinoTuristico3 ,
+                :destinoTuristico6 ,
+                :destinoTuristico9 ,
+                :hotel5 ,
+                :hotel6 ,
+                :paqueteTuristico1 ,
+                :paqueteTuristico2 ,
+                :paqueteTuristico3 ,
+                :paqueteTuristico6 ;
+         :tieneEstacion "true"^^xsd:boolean ;
+         :tieneEstacionTren "true"^^xsd:boolean ;
+         :tieneNombre "Alausí" ;
+         :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/descNnos
+:descNnos rdf:type owl:NamedIndividual ,
+                   :DescNinos ,
+                   :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/descPorTemporada
+:descPorTemporada rdf:type owl:NamedIndividual ,
+                           :DescPorTemporada ,
+                           :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/descTerceraEdad
+:descTerceraEdad rdf:type owl:NamedIndividual ,
+                          :DescTerceraEdad ,
+                          :Descuento .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico1
+:destinoTuristico1 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ,
+                            :PaqueteCultural ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico3 ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad1 ;
+                   :tieneNombre "Museo Pumapungo" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico10
+:destinoTuristico10 rdf:type owl:NamedIndividual ,
+                             :Alojamiento ,
+                             :DestinoDeEntretenimiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ,
+                             :Resort ;
+                    :ofrece :actividadDeEntretenimiento1 ,
+                            :actividadDeEntretenimiento3 ,
+                            :actividadDeportiva2 ;
+                    :ofreceActividad :actividadDeEntretenimiento1 ,
+                                     :actividadDeEntretenimiento3 ,
+                                     :actividadDeportiva2 ;
+                    :ubicadoEn :playa1 ;
+                    :ubicadoEnPlaya :playa1 ;
+                    :tieneNombre "Playa Los Frailes" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico11
+:destinoTuristico11 rdf:type owl:NamedIndividual ,
+                             :Alojamiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ,
+                             :Glamping ;
+                    :ofrece :actividadDeportiva1 ,
+                            :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva1 ,
+                                     :actividadDeportiva3 ;
+                    :ubicadoEn :montana2 ;
+                    :ubicadoEnMontaña :montana2 ;
+                    :tieneNombre "Montaña" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico12
+:destinoTuristico12 rdf:type owl:NamedIndividual ,
+                             :Alojamiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ,
+                             :Glamping ;
+                    :ofrece :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva2 ,
+                                     :actividadDeportiva3 ;
+                    :ubicadoEn :montana1 ;
+                    :ubicadoEnMontaña :montana1 ;
+                    :tieneNombre "Pesca Deportiva Cajas" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico13
+:destinoTuristico13 rdf:type owl:NamedIndividual ,
+                             :Alojamiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ,
+                             :Glamping ;
+                    :ofrece :actividadDeportiva1 ;
+                    :ofreceActividad :actividadDeportiva1 ;
+                    :ubicadoEn :montana3 ;
+                    :ubicadoEnMontaña :montana3 ;
+                    :tieneNombre "Sendero Quishuar" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico14
+:destinoTuristico14 rdf:type owl:NamedIndividual ,
+                             :Alojamiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ,
+                             :Resort ;
+                    :ofrece :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva2 ,
+                                     :actividadDeportiva3 ;
+                    :ubicadoEn :playa2 ;
+                    :ubicadoEnPlaya :playa2 ;
+                    :tieneNombre "Kayak Archidona" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico15
+:destinoTuristico15 rdf:type owl:NamedIndividual ,
+                             :Alojamiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ,
+                             :Resort ;
+                    :ofrece :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva3 ;
+                    :ubicadoEn :playa3 ;
+                    :ubicadoEnPlaya :playa3 ;
+                    :tieneNombre "Parapente Olón" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico2
+:destinoTuristico2 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ;
+                   :ubicadoEn :ciudad2 ;
+                   :ubicadoEnCiudad :ciudad2 ;
+                   :tieneNombre "Mitad del Mundo" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico3
+:destinoTuristico3 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadCultural2 ;
+                   :ofreceActividad :actividadCultural2 ;
+                   :ubicadoEn :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad3 ;
+                   :tieneNombre "Monumento a la Libertad" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico4
+:destinoTuristico4 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeEntretenimiento2 ;
+                   :ofreceActividad :actividadDeEntretenimiento2 ;
+                   :ubicadoEn :ciudad1 ;
+                   :ubicadoEnCiudad :ciudad1 ;
+                   :tieneNombre "HideOut Disco Club" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico5
+:destinoTuristico5 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeEntretenimiento2 ;
+                   :ofreceActividad :actividadDeEntretenimiento2 ;
+                   :ubicadoEn :ciudad2 ;
+                   :ubicadoEnCiudad :ciudad2 ;
+                   :tieneNombre "Casino S.A." .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico6
+:destinoTuristico6 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeEntretenimiento1 ,
+                           :actividadDeEntretenimiento3 ;
+                   :ofreceActividad :actividadDeEntretenimiento1 ,
+                                    :actividadDeEntretenimiento3 ;
+                   :ubicadoEn :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad3 ;
+                   :tieneNombre "Estación Ferrocarril Alausí" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico7
+:destinoTuristico7 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva3 ;
+                   :ubicadoEn :ciudad1 ;
+                   :ubicadoEnCiudad :ciudad1 ;
+                   :tieneNombre "Cuenca Tenis y Golf Club" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico8
+:destinoTuristico8 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :ubicadoEn :ciudad2 ;
+                   :ubicadoEnCiudad :ciudad2 ;
+                   :tieneNombre "Quito Tenis y Golf Club" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/destinoTuristico9
+:destinoTuristico9 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeportiva1 ;
+                   :ofreceActividad :actividadDeportiva1 ;
+                   :ubicadoEn :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad3 ;
+                   :tieneNombre "Senderismo Nariz del Diablo" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/femenino
+:femenino rdf:type owl:NamedIndividual ,
+                   :Femenino ,
+                   :Genero .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/glamping1
+:glamping1 rdf:type owl:NamedIndividual ,
+                    :Alojamiento ,
+                    :DestinoCultural ,
+                    :DestinoDeEntretenimiento ,
+                    :DestinoDeportivo ,
+                    :DestinoTuristico ,
+                    :Glamping ;
+           :ofrece :actividadCultural3 ,
+                   :actividadDeEntretenimiento1 ,
+                   :actividadDeportiva1 ,
+                   :actividadDeportiva2 ,
+                   :actividadDeportiva3 ;
+           :ofreceActividad :actividadCultural3 ,
+                            :actividadDeEntretenimiento1 ,
+                            :actividadDeportiva1 ,
+                            :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+           :ubicadoEn :montana1 ;
+           :precio 85 ;
+           :tieneNombre "El sendero" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/glamping2
+:glamping2 rdf:type owl:NamedIndividual ,
+                    :Alojamiento ,
+                    :DestinoCultural ,
+                    :DestinoDeportivo ,
+                    :DestinoTuristico ,
+                    :Glamping ;
+           :ofrece :actividadCultural3 ,
+                   :actividadDeportiva1 ,
+                   :actividadDeportiva2 ,
+                   :actividadDeportiva3 ;
+           :ofreceActividad :actividadCultural3 ,
+                            :actividadDeportiva1 ,
+                            :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+           :ubicadoEn :montana2 ;
+           :precio 92 ;
+           :tieneNombre "Llullu Llama Mountain Lodge" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/glamping3
+:glamping3 rdf:type owl:NamedIndividual ,
+                    :Alojamiento ,
+                    :DestinoCultural ,
+                    :DestinoDeEntretenimiento ,
+                    :DestinoDeportivo ,
+                    :DestinoTuristico ,
+                    :Glamping ;
+           :ofrece :actividadCultural3 ,
+                   :actividadDeEntretenimiento3 ,
+                   :actividadDeportiva1 ;
+           :ofreceActividad :actividadCultural3 ,
+                            :actividadDeEntretenimiento3 ,
+                            :actividadDeportiva1 ;
+           :ubicadoEn :montana3 ;
+           :precio 115 ;
+           :tieneNombre "Secret Garden" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/hotel1
+:hotel1 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :DestinoCultural ,
+                 :DestinoDeEntretenimiento ,
+                 :DestinoTuristico ,
+                 :Hotel ,
+                 :HotelDeLujo ;
+        :ofrece :actividadCultural3 ,
+                :actividadDeEntretenimiento2 ;
+        :ofreceActividad :actividadCultural3 ,
+                         :actividadDeEntretenimiento2 ;
+        :ubicadoEn :ciudad1 ;
+        :precio 100 ;
+        :tieneNombre "Four Points by Sheraton Cuenca" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/hotel2
+:hotel2 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :DestinoDeEntretenimiento ,
+                 :DestinoTuristico ,
+                 :Hotel ,
+                 :HotelEconomico ;
+        :ofrece :actividadDeEntretenimiento2 ;
+        :ofreceActividad :actividadDeEntretenimiento2 ;
+        :ubicadoEn :ciudad1 ;
+        :precio 37 ;
+        :tieneNombre "Selina Cuenca" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/hotel3
+:hotel3 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :DestinoCultural ,
+                 :DestinoDeEntretenimiento ,
+                 :DestinoTuristico ,
+                 :Hotel ,
+                 :HotelDeLujo ;
+        :ofrece :actividadCultural1 ,
+                :actividadCultural3 ,
+                :actividadDeEntretenimiento3 ;
+        :ofreceActividad :actividadCultural1 ,
+                         :actividadCultural3 ,
+                         :actividadDeEntretenimiento3 ;
+        :ubicadoEn :ciudad2 ;
+        :precio 82.5 ;
+        :tieneNombre "Wydham Garden" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/hotel4
+:hotel4 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelEconomico ;
+        :ubicadoEn :ciudad2 ;
+        :precio 22 ;
+        :tieneNombre "Hotel David" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/hotel5
+:hotel5 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :DestinoCultural ,
+                 :DestinoTuristico ,
+                 :Hotel ,
+                 :HotelDeLujo ;
+        :ofrece :actividadCultural3 ;
+        :ofreceActividad :actividadCultural3 ;
+        :ubicadoEn :ciudad3 ;
+        :precio 89 ;
+        :tieneNombre "Hotel Europa" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/hotel6
+:hotel6 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelEconomico ;
+        :ubicadoEn :ciudad3 ;
+        :precio 28 ;
+        :tieneNombre "Hotel Las Americas" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/lancha1
+:lancha1 rdf:type owl:NamedIndividual ,
+                  :Lancha ,
+                  :Transporte ;
+         :capacidad 7 ,
+                    7 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/masculino
+:masculino rdf:type owl:NamedIndividual ,
+                    :Genero ,
+                    :Masculino .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/montana1
+:montana1 rdf:type owl:NamedIndividual ,
+                   :Montana ,
+                   :Ubicacion ;
+          :tiene :destinoTuristico12 ,
+                 :glamping1 ,
+                 :paqueteTuristico5 ;
+          :tieneEstacion "true"^^xsd:boolean ;
+          :tieneNombre "El Cajas" ;
+          :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/montana2
+:montana2 rdf:type owl:NamedIndividual ,
+                   :Montana ,
+                   :Ubicacion ;
+          :tiene :destinoTuristico11 ,
+                 :glamping2 ,
+                 :paqueteTuristico5 ;
+          :tieneEstacion "true"^^xsd:boolean ;
+          :tieneNombre "Quilotoa" ;
+          :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/montana3
+:montana3 rdf:type owl:NamedIndividual ,
+                   :Montana ,
+                   :Ubicacion ;
+          :tiene :destinoTuristico13 ,
+                 :glamping3 ,
+                 :paqueteTuristico5 ;
+          :tieneEstacion "true"^^xsd:boolean ;
+          :tieneNombre "Volcán Cotopaxi" ;
+          :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/paqueteTuristico1
+:paqueteTuristico1 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ,
+                            :PaqueteCultural ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico1 ,
+                            :destinoTuristico2 ,
+                            :destinoTuristico3 ;
+                   :esvendidoA :turista5 ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ;
+                   :tieneDescuento :descPorTemporada ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad2 ,
+                              :ciudad3 ;
+                   :vendidoPor :agencia1 ;
+                   :precio 350 ;
+                   :vendidoEnMes 7 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/paqueteTuristico2
+:paqueteTuristico2 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ,
+                            :PaqueteDeEntretenimiento ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico4 ,
+                            :destinoTuristico5 ,
+                            :destinoTuristico6 ;
+                   :esvendidoA :turista1 ;
+                   :ofrece :actividadDeEntretenimiento1 ,
+                           :actividadDeEntretenimiento2 ,
+                           :actividadDeEntretenimiento3 ;
+                   :ofreceActividad :actividadDeEntretenimiento1 ,
+                                    :actividadDeEntretenimiento2 ,
+                                    :actividadDeEntretenimiento3 ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad2 ,
+                              :ciudad3 ;
+                   :vendidoPor :agencia2 ;
+                   :precio 400.5 ;
+                   :vendidoEnMes 10 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/paqueteTuristico3
+:paqueteTuristico3 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico7 ,
+                            :destinoTuristico8 ,
+                            :destinoTuristico9 ;
+                   :esvendidoA :turista7 ;
+                   :ofrece :actividadDeportiva1 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva1 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :tieneDescuento :descPorTemporada ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad2 ,
+                              :ciudad3 ;
+                   :vendidoPor :agencia3 ;
+                   :precio 275.3 ;
+                   :vendidoEnMes 12 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/paqueteTuristico4
+:paqueteTuristico4 rdf:type owl:NamedIndividual ,
+                            :Alojamiento ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ,
+                            :PaqueteDeEntretenimiento ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ,
+                            :Resort ;
+                   :destino :destinoTuristico10 ,
+                            :destinoTuristico14 ,
+                            :destinoTuristico15 ;
+                   :esvendidoA :turista2 ;
+                   :ofrece :actividadDeEntretenimiento1 ,
+                           :actividadDeEntretenimiento3 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeEntretenimiento1 ,
+                                    :actividadDeEntretenimiento3 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :ubicadoEn :playa1 ,
+                              :playa2 ,
+                              :playa3 ;
+                   :precio 240 ;
+                   :vendidoEnMes 1 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/paqueteTuristico5
+:paqueteTuristico5 rdf:type owl:NamedIndividual ,
+                            :Alojamiento ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ,
+                            :Glamping ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico11 ,
+                            :destinoTuristico12 ,
+                            :destinoTuristico13 ;
+                   :esvendidoA :turista6 ;
+                   :ofrece :actividadDeportiva1 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva1 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :tieneDescuento :descPorTemporada ;
+                   :ubicadoEn :montana1 ,
+                              :montana2 ,
+                              :montana3 ;
+                   :precio 500 ;
+                   :vendidoEnMes 2 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/paqueteTuristico6
+:paqueteTuristico6 rdf:type owl:NamedIndividual ,
+                            :Alojamiento ,
+                            :DestinoCultural ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ,
+                            :PaqueteCultural ,
+                            :PaqueteDeEntretenimiento ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ,
+                            :Resort ;
+                   :destino :destinoTuristico1 ,
+                            :destinoTuristico14 ,
+                            :destinoTuristico15 ,
+                            :destinoTuristico4 ;
+                   :esvendidoA :turista5 ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ,
+                           :actividadDeEntretenimiento2 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ,
+                                    :actividadDeEntretenimiento2 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad3 ,
+                              :playa2 ,
+                              :playa3 ;
+                   :precio 650 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/playa1
+:playa1 rdf:type owl:NamedIndividual ,
+                 :Playa ,
+                 :Ubicacion ;
+        :tiene :destinoTuristico10 ,
+               :paqueteTuristico4 ,
+               :resort1 ;
+        :tieneAereopuerto "true"^^xsd:boolean ;
+        :tieneEstacion "true"^^xsd:boolean ;
+        :tieneNombre "Chichipe" ;
+        :tienePuerto "true"^^xsd:boolean ;
+        :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/playa2
+:playa2 rdf:type owl:NamedIndividual ,
+                 :Playa ,
+                 :Ubicacion ;
+        :tiene :destinoTuristico14 ,
+               :paqueteTuristico4 ,
+               :paqueteTuristico6 ,
+               :resort2 ;
+        :tieneAereopuerto "true"^^xsd:boolean ;
+        :tieneEstacion "true"^^xsd:boolean ;
+        :tieneNombre "San Cristobal" ;
+        :tienePuerto "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/playa3
+:playa3 rdf:type owl:NamedIndividual ,
+                 :Playa ,
+                 :Ubicacion ;
+        :tiene :destinoTuristico15 ,
+               :paqueteTuristico4 ,
+               :paqueteTuristico6 ,
+               :resort3 ;
+        :tieneEstacion "true"^^xsd:boolean ;
+        :tieneNombre "Montañita" ;
+        :tienePuerto "true"^^xsd:boolean ;
+        :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/resort1
+:resort1 rdf:type owl:NamedIndividual ,
+                  :Alojamiento ,
+                  :DestinoCultural ,
+                  :DestinoDeEntretenimiento ,
+                  :DestinoDeportivo ,
+                  :DestinoTuristico ,
+                  :Resort ;
+         :ofrece :actividadCultural3 ,
+                 :actividadDeEntretenimiento2 ,
+                 :actividadDeEntretenimiento3 ,
+                 :actividadDeportiva2 ,
+                 :actividadDeportiva3 ;
+         :ofreceActividad :actividadCultural3 ,
+                          :actividadDeEntretenimiento2 ,
+                          :actividadDeEntretenimiento3 ,
+                          :actividadDeportiva2 ,
+                          :actividadDeportiva3 ;
+         :ubicadoEn :playa1 ;
+         :precio 105 ;
+         :tieneNombre "Casablanca Chichipe" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/resort2
+:resort2 rdf:type owl:NamedIndividual ,
+                  :Alojamiento ,
+                  :DestinoCultural ,
+                  :DestinoDeEntretenimiento ,
+                  :DestinoDeportivo ,
+                  :DestinoTuristico ,
+                  :Resort ;
+         :ofrece :actividadCultural3 ,
+                 :actividadDeEntretenimiento2 ,
+                 :actividadDeEntretenimiento3 ,
+                 :actividadDeportiva2 ,
+                 :actividadDeportiva3 ;
+         :ofreceActividad :actividadCultural3 ,
+                          :actividadDeEntretenimiento2 ,
+                          :actividadDeEntretenimiento3 ,
+                          :actividadDeportiva2 ,
+                          :actividadDeportiva3 ;
+         :ubicadoEn :playa2 ;
+         :precio 127.5 ;
+         :tieneNombre "Playa Mann" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/resort3
+:resort3 rdf:type owl:NamedIndividual ,
+                  :Alojamiento ,
+                  :DestinoCultural ,
+                  :DestinoDeEntretenimiento ,
+                  :DestinoDeportivo ,
+                  :DestinoTuristico ,
+                  :Resort ;
+         :ofrece :actividadCultural3 ,
+                 :actividadDeEntretenimiento2 ,
+                 :actividadDeEntretenimiento3 ,
+                 :actividadDeportiva2 ,
+                 :actividadDeportiva3 ;
+         :ofreceActividad :actividadCultural3 ,
+                          :actividadDeEntretenimiento2 ,
+                          :actividadDeEntretenimiento3 ,
+                          :actividadDeportiva2 ,
+                          :actividadDeportiva3 ;
+         :ubicadoEn :playa3 ;
+         :precio 98.5 ;
+         :tieneNombre "Montañita States" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/tren1
+:tren1 rdf:type owl:NamedIndividual ,
+                :Transporte ,
+                :Tren ;
+       :ofrecidoPor :ciudad3 ;
+       :capacidad 450 .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista1
+:turista1 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico2 ;
+          :genero :masculino ;
+          :viajaCon :turista10 ,
+                    :turista11 ,
+                    :turista8 ;
+          :edad 22 ,
+                22 ;
+          :tieneNombre "Mateo" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista10
+:turista10 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :femenino ;
+           :viajaCon :turista1 ;
+           :edad 23 ;
+           :tieneNombre "Carolina" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista11
+:turista11 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :femenino ;
+           :viajaCon :turista1 ;
+           :edad 30 ;
+           :tieneNombre "Gabriela" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista12
+:turista12 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ,
+                    :TuristaMenorDeEdad ;
+           :genero :masculino ;
+           :tieneDescuento :descNnos ;
+           :viajaCon :turista7 ;
+           :edad 8 ;
+           :tieneNombre "Nicolas" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista13
+:turista13 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :femenino ;
+           :viajaCon :turista5 ;
+           :edad 47 ;
+           :tieneNombre "Beatriz" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista14
+:turista14 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ,
+                    :TuristaMenorDeEdad ;
+           :genero :femenino ;
+           :tieneDescuento :descNnos ;
+           :viajaCon :turista5 ;
+           :edad 10 ,
+                 10 ;
+           :tieneNombre "Paola" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista15
+:turista15 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :masculino ;
+           :viajaCon :turista2 ;
+           :edad 26 ;
+           :tieneNombre "Luis" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista16
+:turista16 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :masculino ;
+           :viajaCon :turista2 ;
+           :edad 25 ;
+           :tieneNombre "Carlos" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista17
+:turista17 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :masculino ;
+           :viajaCon :turista2 ;
+           :edad 24 ;
+           :tieneNombre "Daniel" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista2
+:turista2 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico4 ;
+          :genero :masculino ;
+          :viajaCon :turista15 ,
+                    :turista16 ,
+                    :turista17 ;
+          :edad 24 ;
+          :tieneNombre "Santiago" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista3
+:turista3 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ,
+                   :TuristaMenorDeEdad ;
+          :genero :masculino ;
+          :tieneDescuento :descNnos ;
+          :viajaCon :turista5 ;
+          :edad 16 ;
+          :tieneNombre "Sebastian" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista4
+:turista4 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdultoMayor ,
+                   :TuristaMayorDeEdad ;
+          :genero :masculino ;
+          :tieneDescuento :descTerceraEdad ;
+          :viajaCon :turista7 ;
+          :edad 68 ;
+          :tieneNombre "Ismael" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista5
+:turista5 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico1 ,
+                   :paqueteTuristico6 ;
+          :genero :masculino ;
+          :tieneDescuento :descPorTemporada ;
+          :viajaCon :turista13 ,
+                    :turista14 ,
+                    :turista3 ;
+          :edad 45 ;
+          :tieneNombre "Mauricio" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista6
+:turista6 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico5 ;
+          :genero :femenino ;
+          :tieneDescuento :descPorTemporada ;
+          :viajaCon :turista9 ;
+          :edad 20 ;
+          :tieneNombre "Innesa" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista7
+:turista7 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdultoMayor ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico3 ;
+          :genero :femenino ;
+          :tieneDescuento :descPorTemporada ,
+                          :descTerceraEdad ;
+          :viajaCon :turista12 ,
+                    :turista4 ;
+          :edad 73 ;
+          :tieneNombre "Cenaida" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista8
+:turista8 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :genero :masculino ;
+          :viajaCon :turista1 ;
+          :edad 32 ;
+          :tieneNombre "Andres" .
+
+
+###  http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo/turista9
+:turista9 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :genero :masculino ;
+          :viajaCon :turista6 ;
+          :edad 22 ,
+                22 ;
+          :tieneNombre "Andres" .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//a> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//u> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//e> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//g> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//m> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//r> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S1" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Hotel ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :precio ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#lessThanOrEqual> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                rdf:first 50 ;
+                                                                                                                                                rdf:rest rdf:nil
+                                                                                                                                              ]
+                                                                                                                                   ]
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :HotelEconomico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S4" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :destino ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceActividad ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//a>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceActividad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//a>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S10" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :destino ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//u>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//u>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S12" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :vendidoEnMes ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 12
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descPorTemporada
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S13" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :vendidoEnMes ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 2
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descPorTemporada
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S11" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :vendidoEnMes ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 7
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descPorTemporada
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S16" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Turista ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :compran ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#classPredicate> :DescPorTemporada ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d>
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//d>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S5" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Turista ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :edad ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//e>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#lessThan> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//e> ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first 18 ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descNnos
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S3" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Turista ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :edad ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//e>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#greaterThanOrEqual> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//e> ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first 65 ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//t> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descTerceraEdad
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S14" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//g> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//m>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Montana ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//m>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceActividad ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//g> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//a>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :ActividadDeportiva ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//a>
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Glamping ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//g>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S15" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//r> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Playa ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Resort ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//r>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S6" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Ciudad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneAereopuerto ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :avion1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S9" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Ciudad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneEstacionTren ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :tren1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S8" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Ciudad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tienePuerto ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :lancha1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S7" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Ciudad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneTerminal ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :autobus1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S2" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Hotel ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//c>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :precio ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#greaterThan> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//p> ;
+                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                rdf:first 50 ;
+                                                                                                                                                rdf:rest rdf:nil
+                                                                                                                                              ]
+                                                                                                                                   ]
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :HotelDeLujo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/crow/ontologies/2025/2/example.org/turismo//h>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/
